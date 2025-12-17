@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mojo - Online Shoes Store</title>
+    
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Custom Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .cart-badge {
+            position: relative;
+        }
+        
+        .cart-badge .badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+        }
+        
+        .category-tabs {
+            background-color: #f8f9fa;
+            padding: 15px 0;
+        }
+        
+        .nav-tabs .nav-link {
+            color: #555;
+            border: none;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: #000;
+            background-color: transparent;
+            border-bottom: 3px solid #000;
+            font-weight: bold;
+        }
+        
+        .gender-filter {
+            margin-top: 10px;
+        }
+        
+        .gender-filter .nav-link {
+            color: #777;
+            padding: 8px 20px;
+        }
+        
+        .gender-filter .nav-link.active {
+            color: #fff;
+            background-color: #000;
+            border-radius: 20px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+        
+        .hero-section h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .hero-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .product-section {
+            padding: 50px 0;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .product-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 30px;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stock-count {
+            color: #dc3545;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 24px;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: #667eea;
+        }
+        
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 32px;
+            }
+            
+            .hero-section p {
+                font-size: 16px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .navbar-brand {
+                font-size: 22px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .product-card {
+                margin-bottom: 20px;
+            }
+            
+            .hero-section {
+                padding: 50px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">mojo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Magazine</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Help</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa-solid fa-user"></i> John Doe
+                        </a>
+                    </li>
+                    <li class="nav-item cart-badge">
+                        <a class="nav-link" href="#">
+                            <i class="fa-solid fa-shopping-cart"></i>
+                            <span class="badge bg-danger">3</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Category Tabs Section -->
+    <div class="category-tabs">
+        <div class="container">
+            <ul class="nav nav-tabs justify-content-center border-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Popular</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Most Viewed</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Newest</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Random</a>
+                </li>
+            </ul>
+            
+            <!-- Gender Filter -->
+            <ul class="nav gender-filter justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Men</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Women</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1>Hiroshi Fujiwara x Nike</h1>
+                    <p>Experience the exclusive collaboration between legendary designer Hiroshi Fujiwara and Nike. Limited edition release featuring premium materials and innovative design.</p>
+                    <a href="#" class="btn btn-dark btn-lg">
+                        <i class="fa-solid fa-play"></i> Watch the Video
+                    </a>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Featured Shoe" class="hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Showcase Section -->
+    <section class="product-section">
+        <div class="container">
+            <h2 class="section-title">Other Great Shoes</h2>
+            <div class="row">
+                <!-- Product Card 1 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400" alt="Nike Bosha Gold" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Nike Bosha Gold</div>
+                            <div class="stock-count">24 Left in Stock</div>
+                            <div class="product-price">$120</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 2 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400" alt="Air Jordan Classic" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Air Jordan Classic</div>
+                            <div class="stock-count">18 Left in Stock</div>
+                            <div class="product-price">$180</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 3 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400" alt="Adidas Ultraboost" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Adidas Ultraboost</div>
+                            <div class="stock-count">32 Left in Stock</div>
+                            <div class="product-price">$150</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 4 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400" alt="Nike Air Max 270" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Nike Air Max 270</div>
+                            <div class="stock-count">15 Left in Stock</div>
+                            <div class="product-price">$140</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 5 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=400" alt="Puma RS-X" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Puma RS-X</div>
+                            <div class="stock-count">28 Left in Stock</div>
+                            <div class="product-price">$110</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Card 6 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400" alt="New Balance 990" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">New Balance 990</div>
+                            <div class="stock-count">20 Left in Stock</div>
+                            <div class="product-price">$175</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <div class="social-icons mb-3">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <p class="mb-2">
+                <a href="#" class="text-white text-decoration-none">Help & Customer Service</a>
+            </p>
+            <p class="mb-0">&copy; 2025 mojo. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
